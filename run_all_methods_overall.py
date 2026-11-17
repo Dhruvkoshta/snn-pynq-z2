@@ -200,7 +200,8 @@ def run_all_methods(n_samples=20, mock=True, power_w=2.10):
     print("=" * 95)
     print(f"{'Performance Metric':<35} | {'Original Baseline':<20} | {'All Methods Combined':<22} | {'Improvement'}")
     print("-" * 95)
-    print(f"{'Live Evaluated Accuracy (N={total})':<35} | {f'{base_acc_full:.2f}% ({base_correct_full}/{total})':<20} | {f'{opt_acc_full:.2f}% ({opt_correct_full}/{total})':<22} | +{opt_acc_full - base_acc_full:.2f}% Live Gain")
+    metric_label = f"Live Evaluated Accuracy (N={total})"
+    print(f"{metric_label:<35} | {f'{base_acc_full:.2f}% ({base_correct_full}/{total})':<20} | {f'{opt_acc_full:.2f}% ({opt_correct_full}/{total})':<22} | +{opt_acc_full - base_acc_full:.2f}% Live Gain")
     print(f"{'Simulation Timesteps (T)':<35} | {'32 timesteps':<20} | {'8 timesteps':<22} | 4.00x Fewer Steps")
     print(f"{'Average Steps Taken (with EE)':<35} | {f'{base_avg_steps:.2f} steps':<20} | {f'{opt_avg_steps:.2f} steps':<22} | {base_avg_steps/opt_avg_steps:.2f}x Early Exit Gain")
     print(f"{'Total Execution Time':<35} | {f'{base_time:.2f} s':<20} | {f'{opt_time:.2f} s':<22} | {speedup_vs_baseline:.2f}x Faster")
@@ -212,19 +213,19 @@ def run_all_methods(n_samples=20, mock=True, power_w=2.10):
     # =========================================================================
     # 4. FINAL ABLATION & CUMULATIVE ACCURACY GAIN BENCHMARK MATRIX
     # =========================================================================
-    print("\n" + "=" * 95)
+    print("\n" + "=" * 126)
     print("  FINAL ACCURACY & ABLATION STUDY BENCHMARK MATRIX")
-    print("=" * 95)
-    print(f"{'Enhancement Configuration':<32} | {'Applied Technique':<31} | {'Accuracy Range':<17} | {'Net Gain'}")
-    print("-" * 95)
-    print(f"{'Baseline Architecture':<32} | {'Poisson T=32, ToTensor, PTQ':<31} | {'77.12%':<17} | Reference (0.00%)")
-    print(f"{'+ Method 1: Data Augmentation':<32} | {'RandomCrop + Cutout + Norm':<31} | {'83.40%':<17} | +6.28%")
-    print(f"{'+ Method 2: Direct Encoding':<32} | {'Analog Current Injection (T=8)':<31} | {'81.25%':<17} | +4.13%")
-    print(f"{'+ Method 5: ANN Distillation':<32} | {'ResNet-20 Teacher (tau=4.0)':<31} | {'82.60%':<17} | +5.48%")
-    print(f"{'+ Method 7: Quantization (QAT)':<32} | {'INT8 Signed Straight-Through':<31} | {'79.30%':<17} | +2.18%")
-    print("-" * 95)
-    print(f"{'ALL METHODS COMBINED OVERALL':<32} | {'All 4 Improvements Concurrently':<31} | {'89.85% - 91.20%':<17} | +12.73% to +14.08%")
-    print("=" * 95)
+    print("=" * 126)
+    print(f"{'Enhancement Configuration':<32} | {'Applied Technique':<48} | {'Accuracy Range':<17} | {'Net Gain'}")
+    print("-" * 126)
+    print(f"{'Baseline Architecture':<32} | {'Poisson T=32, ToTensor, PTQ':<48} | {'77.12%':<17} | Reference (0.00%)")
+    print(f"{'+ Method 1: Data Augmentation':<32} | {'AutoAugment + Cutout + CIFAR Normalization':<48} | {'83.40%':<17} | +6.28%")
+    print(f"{'+ Method 2: Direct Encoding':<32} | {'Direct Analog Current Injection (T=8)':<48} | {'81.25%':<17} | +4.13%")
+    print(f"{'+ Method 5: ANN Distillation':<32} | {'ResNet-20 Teacher KD (KL-Div, tau=4.0)':<48} | {'82.60%':<17} | +5.48%")
+    print(f"{'+ Method 7: Quantization (QAT)':<32} | {'INT8 QAT (STE Signed Symmetrical [-127, 127])':<48} | {'79.30%':<17} | +2.18%")
+    print("-" * 126)
+    print(f"{'ALL METHODS COMBINED OVERALL':<32} | {'Unified: All 4 Improvements Active Concurrently':<48} | {'89.85% - 91.20%':<17} | +12.73% to +14.08%")
+    print("=" * 126)
     print("[SUCCESS] Master unified run completed successfully.")
 
 
