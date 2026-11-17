@@ -1,0 +1,9 @@
+# Core dependencies for Host PC & PYNQ-Z2 Inference
+numpy>=1.22.0
+pillow>=9.0.0
+
+# Optional Training & Simulation dependencies (for retraining & GPU acceleration)
+# Install torch and snntorch if performing training:
+# torch>=2.0.0
+# torchvision>=0.15.0
+# snntorch>=0.6.4
