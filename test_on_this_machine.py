@@ -42,10 +42,10 @@ def check_dataset():
     assert batch.stat().st_size > 1_000_000, "Dataset file corrupted or empty"
 
 def check_methods():
-    for m in ["method1_data_augmentation", "method2_direct_encoding", 
-              "method5_knowledge_distillation", "method7_quantization_aware_training", "all_combined"]:
-        p = HERE / "methods" / m
-        assert p.is_dir(), f"Missing method dir {p}"
+    p = HERE / "methods" / "all_combined"
+    assert p.is_dir(), f"Missing unified all_combined method dir {p}"
+    assert (p / "models" / "snn_all_combined.py").exists(), "Missing snn_all_combined.py"
+    assert (p / "training" / "train_all_combined.py").exists(), "Missing train_all_combined.py"
 
 def check_mock_inference():
     cmd = [sys.executable, str(HERE / "pynq_run_inference.py"), "--mock", "--n", "3", "--T", "8"]

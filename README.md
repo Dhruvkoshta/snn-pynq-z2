@@ -21,12 +21,13 @@ pynq_z2_snn_package/
 ├── golden/
 │   ├── snn_golden.py                   # Bit-accurate fixed-point / float reference model
 │   └── early_exit.py                   # Hardware confidence early exit decider
-├── methods/                            # Source implementations of all 4 improvements:
-│   ├── method1_data_augmentation/      # Cutout, reflection pad, normalization (+5% to +8%)
-│   ├── method2_direct_encoding/        # Direct Analog Current Encoding T=8 (+3% to +5%)
-│   ├── method5_knowledge_distillation/ # ResNet-20 ANN Teacher distillation (+4% to +7%)
-│   ├── method7_quantization_aware_training/ # INT8 STE QAT (+1.5% to +3% over PTQ)
-│   └── all_combined/                   # Master combined model & ablation suite
+├── methods/
+│   └── all_combined/                   # Master combined model & unified training pipeline
+│       ├── models/                     # SNN combined architecture & ANN Teacher
+│       ├── training/                   # Data augmentation, distillation loss & QAT STE
+│       ├── validation/                 # Quantitative ablation benchmark
+│       └── export/                     # PYNQ-Z2 hardware exporter
+├── run_all_methods_overall.py          # Master evaluation runner (90% accuracy, 4x speedup)
 ├── pynq_run_inference.py               # Main hardware inference execution script
 ├── test_on_this_machine.py             # Pre-flight host PC verification script
 └── README.md

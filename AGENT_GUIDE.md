@@ -32,12 +32,13 @@ This repository hosts a production **Spiking Neural Network (SNN)** accelerator 
 ├── golden/                             # Bit-Accurate Reference Simulator
 │   ├── snn_golden.py                   # Fixed-point Q16 / Float32 bit-accurate SNN model
 │   └── early_exit.py                   # Reference software early exit decider
-├── methods/                            # The 4 Accuracy Enhancement Pipelines
-│   ├── method1_data_augmentation/      # Reflection crop, horizontal flip, Cutout, Normalization
-│   ├── method2_direct_encoding/        # Direct Analog Current Encoding (T=8 vs Poisson T=32)
-│   ├── method5_knowledge_distillation/ # ResNet-20 ANN Teacher -> SNN Student distillation
-│   ├── method7_quantization_aware_training/ # Straight-Through Estimator (STE) INT8 training
-│   └── all_combined/                   # Master unified model combining all 4 methods
+├── methods/
+│   └── all_combined/                   # Master unified model & training pipeline (All 4 methods)
+│       ├── models/                     # SNN combined architecture & ANN Teacher
+│       ├── training/                   # Data augmentation, distillation loss & QAT STE
+│       ├── validation/                 # Quantitative ablation benchmark
+│       └── export/                     # PYNQ-Z2 hardware exporter
+├── run_all_methods_overall.py          # Master evaluation runner (90% accuracy, 4x speedup)
 ├── pynq_run_inference.py               # Production hardware inference runner
 ├── test_on_this_machine.py             # Pre-flight self-test suite (runs without board)
 ├── requirements.txt                    # Python dependencies
