@@ -192,6 +192,16 @@ def run_all_methods(n_samples=20, mock=True, power_w=2.10):
     avg_latency = np.mean(latencies_opt)
     speedup_vs_baseline = base_time / opt_time
 
+    print("-" * 85)
+    print(f"  ✓ Combined Overall Full 8-step Accuracy : {opt_acc_full:.2f}% ({opt_correct_full}/{total})")
+    print(f"  ✓ Combined Overall Early-Exit Accuracy  : {opt_acc_ee:.2f}% ({opt_correct_ee}/{total})")
+    print(f"  ✓ Combined Overall Avg Timesteps        : {opt_avg_steps:.2f} / 8 steps")
+    print(f"  ✓ Combined Overall Execution Time       : {opt_time:.2f} s ({opt_time/total*1000:.1f} ms/img)")
+    print("-" * 85)
+    print(f"  ★ FINAL BASELINE PIPELINE ACCURACY      : {base_acc_full:.2f}% ({base_correct_full}/{total})")
+    print(f"  ★ FINAL ALL METHODS COMBINED ACCURACY   : {opt_acc_full:.2f}% ({opt_correct_full}/{total}) [{'+' if opt_acc_full >= base_acc_full else ''}{opt_acc_full - base_acc_full:.2f}% Net Gain]")
+    print("-" * 85)
+
     # =========================================================================
     # 3. EXECUTIVE COMPARATIVE BENCHMARK SUMMARY
     # =========================================================================
